@@ -112,6 +112,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable B service adj transition by default
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.sys.fw.bservice_enable=true \
+    ro.sys.fw.dex2oat_thread_count=8 \
     ro.vendor.qti.sys.fw.bservice_limit=5 \
     ro.vendor.qti.sys.fw.bservice_age=5000
 
