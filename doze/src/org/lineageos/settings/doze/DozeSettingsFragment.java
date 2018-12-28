@@ -40,6 +40,7 @@ public class DozeSettingsFragment extends PreferenceFragment implements
     private static final String KEY_GESTURE_HAND_WAVE = "gesture_hand_wave";
     private static final String KEY_GESTURE_PICK_UP = "gesture_pick_up";
     private static final String KEY_GESTURE_POCKET = "gesture_pocket";
+    private View mSwitchBar;
 
     private Switch mSwitch;
     private SwitchPreference mHandwavePreference;
@@ -79,11 +80,15 @@ public class DozeSettingsFragment extends PreferenceFragment implements
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        View switchBar = view.findViewById(R.id.switch_bar);
-        mSwitch = (Switch) switchBar.findViewById(android.R.id.switch_widget);
+        mSwitchBar = view.findViewById(R.id.switch_bar);
+        mSwitch = (Switch) mSwitchBar.findViewById(android.R.id.switch_widget);
         mSwitch.setChecked(isDozeEnabled());
         mSwitch.setOnCheckedChangeListener(this);
-
+        mSwitchBar.setActivated(dozeEnabled);
+        mSwitchBar.setOnClickListener(v -> {
+            switchWidget.setChecked(!switchWidget.isChecked());
+            mSwitchBar.setActivated(switchWidget.isChecked());
+        });
 
         boolean dozeEnabled = isDozeEnabled();
         mSwitchBarText = (TextView) view.findViewById(R.id.switch_text);
@@ -114,6 +119,7 @@ public class DozeSettingsFragment extends PreferenceFragment implements
         mSwitchBarText.setText(getString(b ? R.string.switch_bar_on : R.string.switch_bar_off));
 
         if (ret) {
+            mSwitchBar.setActivated(isChecked);
             mHandwavePreference.setEnabled(b);
             mPickupPreference.setEnabled(b);
             mPocketPreference.setEnabled(b);
