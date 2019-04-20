@@ -101,6 +101,12 @@ on boot
     chown system shell /sys/class/sensors/lsensor/adc
     #ASUS_BSP +++ ShawnHuang "Proximity/Light sensor"
 
+    #DT2W
+    chown system system /sys/devices/soc/78b7000.i2c/i2c-3/3-0038/dclick_mode
+    chmod 0664 /sys/devices/soc/78b7000.i2c/i2c-3/3-0038/dclick_mode
+    chown system system /proc/touchpanel/dclick_mode
+    chmod 0664 /proc/touchpanel/dclick_mode
+
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
